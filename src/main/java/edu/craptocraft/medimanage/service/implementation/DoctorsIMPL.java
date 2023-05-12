@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.craptocraft.medimanage.entity.Doctor;
-import edu.craptocraft.medimanage.repository.DoctorRepo;
-import edu.craptocraft.medimanage.service.DoctorService;
+import edu.craptocraft.medimanage.entity.Doctors;
+import edu.craptocraft.medimanage.repository.DoctorsRepo;
+import edu.craptocraft.medimanage.service.DoctorsService;
 
 @Service
-public class DoctorIMPL implements DoctorService {
+public class DoctorsIMPL implements DoctorsService {
 
     @Autowired
-    private DoctorRepo repo;
+    private DoctorsRepo repo;
 
     @Override
-    public Doctor create(Doctor doctor) {
+    public Doctors create(Doctors doctor) {
         doctor.setId(doctor.getId());
         doctor.setEmail(doctor.getEmail());
         doctor.setPassword(doctor.getPassword());
@@ -27,17 +27,17 @@ public class DoctorIMPL implements DoctorService {
     }
 
     @Override
-    public List<Doctor> getAll() {
-        return (List<Doctor>) this.repo.findAll();
+    public List<Doctors> getAll() {
+        return (List<Doctors>) this.repo.findAll();
     }
 
     @Override
-    public Doctor getOne(Integer id) {
+    public Doctors getOne(Integer id) {
         return this.repo.findById(id).orElse(null);
     }
 
     @Override
-    public Doctor update(Integer id, Doctor doctor) {
+    public Doctors update(Integer id, Doctors doctor) {
         doctor.setId(id);
         doctor.setEmail(doctor.getEmail());
         doctor.setPassword(doctor.getPassword());

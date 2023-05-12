@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "doctors")
-public class Doctor {
+public class Doctors {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,9 @@ public class Doctor {
     @Column(name = "session", unique = true)
     private Integer session;
 
-    public Doctor() {}
+    public Doctors() {}
 
-    public Doctor(String email, String password, String name, LocalDate lastLog, Integer session) {
+    public Doctors(String email, String password, String name, LocalDate lastLog, Integer session) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -98,7 +98,7 @@ public class Doctor {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Doctor that = (Doctor) o;
+        Doctors that = (Doctors) o;
         return Objects.equals(id, that.id);
     }
 

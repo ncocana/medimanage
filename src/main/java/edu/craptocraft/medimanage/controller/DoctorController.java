@@ -8,20 +8,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import edu.craptocraft.medimanage.entity.Doctor;
-import edu.craptocraft.medimanage.service.implementation.DoctorIMPL;
+import edu.craptocraft.medimanage.entity.Doctors;
+import edu.craptocraft.medimanage.service.implementation.DoctorsIMPL;
 
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
 
     @Autowired
-    private DoctorIMPL impl;
+    private DoctorsIMPL impl;
 
     @PostMapping(path = "/create")
-    public ResponseEntity<?> create(@RequestBody Doctor doctor) {
+    public ResponseEntity<?> create(@RequestBody Doctors doctor) {
         try {
-            Doctor createdDoctor = this.impl.create(doctor);
+            Doctors createdDoctor = this.impl.create(doctor);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdDoctor);
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().body("An error ocurred: " + e.getMessage() + "\nThe email or session are already in use.");
@@ -30,19 +30,19 @@ public class DoctorController {
 
     @GetMapping(path = "/get/all")
     public ResponseEntity<?> getAll() {
-        List<Doctor> listDoctor = this.impl.getAll();
+        List<Doctors> listDoctor = this.impl.getAll();
         return ResponseEntity.ok(listDoctor);
     }
 
     @GetMapping(path = "/get/{id}")
     public ResponseEntity<?> getOne(@PathVariable Integer id) {
-        Doctor singleDoctor = this.impl.getOne(id);
+        Doctors singleDoctor = this.impl.getOne(id);
         return ResponseEntity.ok(singleDoctor);
     }
 
     @PutMapping(path = "update/{id}")
-    public ResponseEntity<?> updateLanguage(@PathVariable Integer id, @RequestBody Doctor doctor) {
-        Doctor updatedDoctor = this.impl.update(id, doctor);
+    public ResponseEntity<?> updateLanguage(@PathVariable Integer id, @RequestBody Doctors doctor) {
+        Doctors updatedDoctor = this.impl.update(id, doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedDoctor);
     }
 
