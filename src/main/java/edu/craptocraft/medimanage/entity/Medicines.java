@@ -22,15 +22,14 @@ public class Medicines {
     private String name;
     
     @Column(name = "tmax")
-    private String tmax;
+    private Float tmax;
     
     @Column(name = "tmin")
-    private String tmin;
+    private Float tmin;
 
     public Medicines() {}
 
-    public Medicines(Integer id, String name, String tmax, String tmin) {
-        this.id = id;
+    public Medicines(String name, Float tmax, Float tmin) {
         this.name = name;
         this.tmax = tmax;
         this.tmin = tmin;
@@ -52,19 +51,19 @@ public class Medicines {
         this.name = name;
     }
 
-    public String getTmax() {
+    public Float getTmax() {
         return this.tmax;
     }
 
-    public void setTmax(String tmax) {
+    public void setTmax(Float tmax) {
         this.tmax = tmax;
     }
 
-    public String getTmin() {
+    public Float getTmin() {
         return this.tmin;
     }
 
-    public void setTmin(String tmin) {
+    public void setTmin(Float tmin) {
         this.tmin = tmin;
     }    
 

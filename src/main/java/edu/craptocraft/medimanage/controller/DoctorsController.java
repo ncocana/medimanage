@@ -13,7 +13,7 @@ import edu.craptocraft.medimanage.service.implementation.DoctorsIMPL;
 
 @RestController
 @RequestMapping("/doctors")
-public class DoctorController {
+public class DoctorsController {
 
     @Autowired
     private DoctorsIMPL impl;
@@ -30,8 +30,8 @@ public class DoctorController {
 
     @GetMapping(path = "/get/all")
     public ResponseEntity<?> getAll() {
-        List<Doctors> listDoctor = this.impl.getAll();
-        return ResponseEntity.ok(listDoctor);
+        List<Doctors> listDoctors = this.impl.getAll();
+        return ResponseEntity.ok(listDoctors);
     }
 
     @GetMapping(path = "/get/{id}")
@@ -41,13 +41,13 @@ public class DoctorController {
     }
 
     @PutMapping(path = "update/{id}")
-    public ResponseEntity<?> updateLanguage(@PathVariable Integer id, @RequestBody Doctors doctor) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Doctors doctor) {
         Doctors updatedDoctor = this.impl.update(id, doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedDoctor);
     }
 
     @DeleteMapping(path= "delete/{id}")
-    public ResponseEntity<?> deleteLanguage(@PathVariable Integer id) {
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
         this.impl.delete(id);
         return ResponseEntity.ok().build();
     }
