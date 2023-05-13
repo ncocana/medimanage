@@ -16,7 +16,7 @@ public class Patients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -31,11 +31,15 @@ public class Patients {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Patients(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

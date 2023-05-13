@@ -2,6 +2,8 @@ package edu.craptocraft.medimanage.service.implementation;
 
 import java.util.List;
 
+import javax.print.Doc;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +34,12 @@ public class DoctorsIMPL implements DoctorsService {
     }
 
     @Override
-    public Doctors getOne(Integer id) {
+    public Doctors getOne(int id) {
         return this.repo.findById(id).orElse(null);
     }
 
     @Override
-    public Doctors update(Integer id, Doctors doctor) {
+    public Doctors update(int id, Doctors doctor) {
         doctor.setId(id);
         doctor.setEmail(doctor.getEmail());
         doctor.setPassword(doctor.getPassword());
@@ -48,8 +50,13 @@ public class DoctorsIMPL implements DoctorsService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         this.repo.deleteById(id);
     }
+
+    // @Override
+    // public Doctors findByEmail(String email) {
+    //     return this.repo.findByEmail(email);
+    // }
 
 }

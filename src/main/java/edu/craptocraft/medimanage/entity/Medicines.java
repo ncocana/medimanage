@@ -16,7 +16,7 @@ public class Medicines {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     
     @Column(name = "name")
     private String name;
@@ -35,11 +35,15 @@ public class Medicines {
         this.tmin = tmin;
     }
 
-    public Integer getId() {
+    public Medicines(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

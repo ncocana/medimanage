@@ -30,12 +30,12 @@ public class MedicinesIMPL implements MedicinesService {
     }
 
     @Override
-    public Medicines getOne(Integer id) {
+    public Medicines getOne(int id) {
         return this.repo.findById(id).orElse(null);
     }
 
     @Override
-    public Medicines update(Integer id, Medicines medicine) {
+    public Medicines update(int id, Medicines medicine) {
         medicine.setId(id);
         medicine.setName(medicine.getName());
         medicine.setTmax(medicine.getTmax());
@@ -44,7 +44,7 @@ public class MedicinesIMPL implements MedicinesService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         this.repo.deleteById(id);
     }
     

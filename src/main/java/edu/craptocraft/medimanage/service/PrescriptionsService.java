@@ -10,10 +10,10 @@ public interface PrescriptionsService {
 
     public List<Prescriptions> getAll();
 
-    public Prescriptions getOne(Integer id);
+    public Prescriptions getOne(int id);
 
-    public Prescriptions update(Integer id, Prescriptions prescription);
+    public Prescriptions update(int id, Prescriptions prescription);
 
-    public void delete(Integer id);
+    public void delete(int id);
 
 }

@@ -17,7 +17,7 @@ public class Doctors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -32,11 +32,11 @@ public class Doctors {
     private LocalDate lastLog;
     
     @Column(name = "session", unique = true)
-    private Integer session;
+    private int session;
 
     public Doctors() {}
 
-    public Doctors(String email, String password, String name, LocalDate lastLog, Integer session) {
+    public Doctors(String email, String password, String name, LocalDate lastLog, int session) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -44,11 +44,15 @@ public class Doctors {
         this.session = session;
     }
 
-    public Integer getId() {
+    public Doctors(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,11 +88,11 @@ public class Doctors {
         this.lastLog = lastLog;
     }
 
-    public Integer getSession() {
+    public int getSession() {
         return this.session;
     }
 
-    public void setSession(Integer session) {
+    public void setSession(int session) {
         this.session = session;
     }
 

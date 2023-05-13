@@ -3,11 +3,14 @@ package edu.craptocraft.medimanage.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import edu.craptocraft.medimanage.service.implementation.PrescriptionsIMPL;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,59 +20,68 @@ public class Prescriptions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
-    @Column(name = "idDoctor")
-    private String idDoctor;
+    @ManyToOne
+    @JoinColumn(name = "idDoctor")
+    private Doctors idDoctor;
     
-    @Column(name = "idMedicine")
-    private String idMedicine;
+    @ManyToOne
+    @JoinColumn(name = "idMedicine")
+    private Medicines idMedicine;
     
-    @Column(name = "idPatient")
-    private String idPatient;
+    @ManyToOne
+    @JoinColumn(name = "idPatient")
+    private Patients idPatient;
     
     @Column(name = "date")
     private LocalDate date;
 
     public Prescriptions() {}
 
-    public Prescriptions(Integer id, String idDoctor, String idMedicine, String idPatient, LocalDate date) {
-        this.id = id;
+    public Prescriptions(Doctors idDoctor, Medicines idMedicine, Patients idPatient, LocalDate date) {
         this.idDoctor = idDoctor;
         this.idMedicine = idMedicine;
         this.idPatient = idPatient;
         this.date = date;
     }
 
-    public Integer getId() {
+    public Prescriptions(int idDoctor, int idMedicine, int idPatient, LocalDate date) {
+        this.idDoctor = PrescriptionsIMPL.getDoctor(idDoctor);
+        this.idMedicine = PrescriptionsIMPL.getMedicine(idMedicine);
+        this.idPatient = PrescriptionsIMPL.getPatient(idPatient);
+        this.date = date;
+    }
+
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getIdDoctor() {
+    public Doctors getIdDoctor() {
         return this.idDoctor;
     }
 
-    public void setIdDoctor(String idDoctor) {
+    public void setIdDoctor(Doctors idDoctor) {
         this.idDoctor = idDoctor;
     }
 
-    public String getIdMedicine() {
+    public Medicines getIdMedicine() {
         return this.idMedicine;
     }
 
-    public void setIdMedicine(String idMedicine) {
+    public void setIdMedicine(Medicines idMedicine) {
         this.idMedicine = idMedicine;
     }
 
-    public String getIdPatient() {
+    public Patients getIdPatient() {
         return this.idPatient;
     }
 
-    public void setIdPatient(String idPatient) {
+    public void setIdPatient(Patients idPatient) {
         this.idPatient = idPatient;
     }
 

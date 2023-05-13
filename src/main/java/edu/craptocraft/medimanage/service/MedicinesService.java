@@ -10,10 +10,10 @@ public interface MedicinesService {
 
     public List<Medicines> getAll();
 
-    public Medicines getOne(Integer id);
+    public Medicines getOne(int id);
 
-    public Medicines update(Integer id, Medicines medicine);
+    public Medicines update(int id, Medicines medicine);
 
-    public void delete(Integer id);
+    public void delete(int id);
 
 }

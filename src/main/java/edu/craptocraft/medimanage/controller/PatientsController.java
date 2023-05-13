@@ -35,19 +35,19 @@ public class PatientsController {
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+    public ResponseEntity<?> getOne(@PathVariable int id) {
         Patients singlePatient = this.impl.getOne(id);
         return ResponseEntity.ok(singlePatient);
     }
 
     @PutMapping(path = "update/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Patients patient) {
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Patients patient) {
         Patients updatedPatient = this.impl.update(id, patient);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedPatient);
     }
 
     @DeleteMapping(path= "delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> delete(@PathVariable int id) {
         this.impl.delete(id);
         return ResponseEntity.ok().build();
     }

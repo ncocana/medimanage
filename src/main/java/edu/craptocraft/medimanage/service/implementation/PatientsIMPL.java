@@ -29,12 +29,12 @@ public class PatientsIMPL implements PatientsService {
     }
 
     @Override
-    public Patients getOne(Integer id) {
+    public Patients getOne(int id) {
         return this.repo.findById(id).orElse(null);
     }
 
     @Override
-    public Patients update(Integer id, Patients patient) {
+    public Patients update(int id, Patients patient) {
         patient.setId(id);
         patient.setEmail(patient.getEmail());
         patient.setName(patient.getName());
@@ -42,7 +42,7 @@ public class PatientsIMPL implements PatientsService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         this.repo.deleteById(id);
     }
     
