@@ -18,13 +18,13 @@ public class Medicines {
     @Column(name = "id")
     private int id;
     
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
     
-    @Column(name = "tmax")
+    @Column(name = "tmax", length = 50)
     private Float tmax;
     
-    @Column(name = "tmin")
+    @Column(name = "tmin", length = 50)
     private Float tmin;
 
     public Medicines() {}

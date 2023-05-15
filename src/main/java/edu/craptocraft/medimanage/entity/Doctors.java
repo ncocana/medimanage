@@ -19,13 +19,13 @@ public class Doctors {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, length = 50)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 100)
     private String password;
     
-    @Column(name = "name")
+    @Column(name = "name", length = 100)
     private String name;
     
     @Column(name = "lastLog")

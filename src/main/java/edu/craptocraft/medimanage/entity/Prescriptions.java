@@ -53,6 +53,10 @@ public class Prescriptions {
         this.date = date;
     }
 
+    public Prescriptions(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return this.id;
     }
