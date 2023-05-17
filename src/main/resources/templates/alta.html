@@ -4,15 +4,78 @@
         <title>Alta | MediManage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
-        <link rel="stylesheet" th:href="@{/static/css/main.css}">
-        <link rel="icon" type="image/x-icon" th:href="@{/static/img/favicon.ico}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
     <body>
-        <div id="container-main">
-            <h1>Alta</h1>
-            <a href="/gestion"><button type="submit">Volver atrás</button></a>
-            <a href="/home"><button type="submit">Cerrar sesión</button></a>
-        </div>
+        <header>
+            <nav class="nav">
+                <a href="/" class="logo nav-link">MediManage</a>
+                <ul class="nav-menu">
+                    <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
+                    <li class="nav-menu-item"><a href="/gestion" class="nav-menu-link">Gestion</a></li>
+                    <li class="nav-menu-item"><a href="/login" class="nav-menu-link"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1 class="text-center">Discharge</h1>
+            <div class="form-group">
+                <label for="selectDoctor">Doctor</label>
+                <select id="selectDoctor" class="form-select" required>
+                    <option disabled selected value="">Select a doctor</option>
+                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectMedicine">Medicine</label>
+                <select id="selectMedicine" class="form-select" required>
+                    <option disabled selected value="">Select a medicine</option>
+                    <option th:each="medicine : ${medicines}" th:value="${medicine.id}" th:text="${medicine.name}">Medicine</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectPatient">Patient</label>
+                <select id="selectPatient" class="form-select" required>
+                    <option disabled selected value="">Select a patient</option>
+                    <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.name}">Patient</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputDate">Date</label>
+                <input type="date" class="form-input" id="inputDate" placeholder="Password">
+            </div>
+            <div class="text-center"><button type="submit" class="button" id="createButton">Create</button></div>
+        </main>
+
+        <script>
+            $(document).ready(function() {
+                $('#createButton').click(function() {
+                    var idDoctor = $('#selectDoctor').val();
+                    var idMedicine = $('#selectMedicine').val();
+                    var idPatient = $('#selectPatient').val();
+                    var date = $('#inputDate').val();
+                    var data = {
+                        "idDoctor": idDoctor,
+                        "idMedicine": idMedicine,
+                        "idPatient": idPatient,
+                        "date": date
+                    };
+                    $.ajax({
+                        url: '/prescriptions/create',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        complete: function(response) {
+                            window.location.href = '/gestion';
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

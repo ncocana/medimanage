@@ -4,43 +4,29 @@
         <title>Home | MediManage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
-        <link rel="stylesheet" th:href="@{/static/css/main.css}">
-        <link rel="icon" type="image/x-icon" th:href="@{/static/img/favicon.ico}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">MediManage</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="#">Page 2</a></li>
+        <header>
+            <nav class="nav">
+                <a href="/" class="logo nav-link">MediManage</a>
+                <ul class="nav-menu">
+                    <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
+                    <li class="nav-menu-item"><a href="/login" class="nav-menu-link"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </nav>
-            
-        <div class="container">
+            </nav>
+        </header>
+
+        <main>
             <div class="text-center">
                 <img th:src="@{img/header.jpg}" alt="header">
-                <h1 class="mb-3">Welcome to MediManage</h3>
-                <h4 class="mb-3">Log in to start working!</p>
-                <a class="btn btn-primary" href="/login" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                <h1>Welcome to MediManage</h3>
+                <h4>Log in to start working!</p>
+                <a class="button" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
             </div>
-        </div>
+        </main>
     </body>
 </html>

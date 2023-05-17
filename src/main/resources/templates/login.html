@@ -4,15 +4,37 @@
         <title>Login | MediManage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
-        <link rel="stylesheet" th:href="@{/static/css/main.css}">
-        <link rel="icon" type="image/x-icon" th:href="@{/static/img/favicon.ico}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     </head>
     <body>
-        <div id="container-main">
-            <h1>Login</h1>
-            <a href="/gestion"><button type="submit">Iniciar sesión</button></a>
-            <a href="/home"><button type="submit">Volver atrás</button></a>
-        </div>
+        <header>
+            <nav class="nav">
+                <a href="/" class="logo nav-link">MediManage</a>
+                <ul class="nav-menu">
+                    <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
+                    <li class="nav-menu-item"><a href="/login" class="nav-menu-link"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1 class="text-center">Login</h1>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-input" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="text-center"><button type="submit" class="button"><span class="glyphicon glyphicon-log-in"></span> Log in</button></div>
+            </form>
+        </main>
     </body>
 </html>
