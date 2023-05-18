@@ -22,18 +22,42 @@
 
         <main>
             <h1 class="text-center">Login</h1>
-            <form action="/loginProcess" method="post">
-                <div class="form-group">
-                    <label for="emailInput">Email address</label>
-                    <input type="email" class="form-input" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="passwordInput">Password</label>
-                    <input type="password" class="form-input" id="passwordInput" placeholder="Password">
-                </div>
-                <div class="text-center"><button type="submit" class="button"><span class="glyphicon glyphicon-log-in"></span> Log in</button></div>
-            </form>
+            <div class="form-group">
+                <label for="emailInput">Email address</label>
+                <input type="email" class="form-input" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Password</label>
+                <input type="password" class="form-input" id="passwordInput" placeholder="Password">
+            </div>
+            <div class="text-center"><button type="submit" id="loginButton" class="button"><span class="glyphicon glyphicon-log-in"></span> Log in</button></div>
         </main>
+
+        <script>
+            $(document).ready(function() {
+                $('#loginButton').click(function() {
+                    var email = $('#emailInput').val();
+                    var password = $('#passwordInput').val();
+                    var data = {
+                        "email": email,
+                        "password": password
+                    };
+                    $.ajax({
+                        url: '/login-process',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        complete: function(response) {
+                            // window.location.href = '/gestion';
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

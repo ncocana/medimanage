@@ -68,7 +68,7 @@
                         url: '/prescriptions/create',
                         type: 'POST',
                         data: JSON.stringify(data),
-                        contentType: 'application/json',
+                        contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         complete: function(response) {
                             window.location.href = '/gestion';
