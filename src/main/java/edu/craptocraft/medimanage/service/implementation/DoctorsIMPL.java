@@ -52,9 +52,4 @@ public class DoctorsIMPL implements DoctorsService {
         this.repo.deleteById(id);
     }
 
-    // @Override
-    // public Doctors findByEmail(String email) {
-    //     return this.repo.findByEmail(email);
-    // }
-
 }
