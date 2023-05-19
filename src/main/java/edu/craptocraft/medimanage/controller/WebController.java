@@ -95,6 +95,7 @@ public class WebController {
     public Object gestion() {
         if (currentUser != null) {
             ModelAndView modelAndView = new ModelAndView("gestion");
+            modelAndView.addObject("currentUser", currentUser);
             modelAndView.addObject("prescriptions", servicePrescription.getAll());
             return modelAndView;
         } else {
@@ -107,6 +108,7 @@ public class WebController {
         if (currentUser != null) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("alta");
+            modelAndView.addObject("currentUser", currentUser);
             modelAndView.addObject("doctors", serviceDoctor.getAll());
             modelAndView.addObject("medicines", serviceMedicine.getAll());
             modelAndView.addObject("patients", servicePatient.getAll());

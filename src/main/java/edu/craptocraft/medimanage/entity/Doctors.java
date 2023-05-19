@@ -31,17 +31,17 @@ public class Doctors {
     @Column(name = "lastLog")
     private LocalDate lastLog;
     
-    @Column(name = "session", unique = true)
-    private int session;
+    @Column(name = "session", unique = true, length = 10)
+    private Integer session;
 
     public Doctors() {}
 
-    public Doctors(String email, String password, String name, LocalDate lastLog, int session) {
+    public Doctors(String email, String password, String name, LocalDate lastLog) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.lastLog = lastLog;
-        this.session = session;
+        this.session = null;
     }
 
     public Doctors(int id) {
@@ -88,11 +88,11 @@ public class Doctors {
         this.lastLog = lastLog;
     }
 
-    public int getSession() {
+    public Integer getSession() {
         return this.session;
     }
 
-    public void setSession(int session) {
+    public void setSession(Integer session) {
         this.session = session;
     }
 

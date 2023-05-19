@@ -55,8 +55,8 @@ public class DoctorsTest {
     public void testGetSession() {
         Doctors doctor = new Doctors();
         doctor.setSession(3);
-        int session = doctor.getSession();
-        assertEquals(3, session);
+        Integer session = doctor.getSession();
+        assertEquals(3, session, 0);
     }
 
     @Test

@@ -26,8 +26,8 @@
             <div class="form-group">
                 <label for="selectDoctor">Doctor</label>
                 <select id="selectDoctor" class="form-select" required>
-                    <option disabled selected value="">Select a doctor</option>
-                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
+                    <!-- <option disabled selected value="">Select a doctor</option> -->
+                    <option th:each="doctor : ${doctors}" th:if="${currentUser.id == doctor.id}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
                 </select>
             </div>
             <div class="form-group">

@@ -1,10 +1,12 @@
 package edu.craptocraft.medimanage.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +30,7 @@ public class DoctorsControllerTest {
     @Test
     public void test_create() {
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now(), 100);
+        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
         ResponseEntity<?> response = controller.create(entity);
 
         assertNotNull(response);
@@ -41,7 +43,7 @@ public class DoctorsControllerTest {
         assertEquals(entity.getPassword(), createdEntity.getPassword());
         assertEquals(entity.getName(), createdEntity.getName());
         assertEquals(entity.getLastLog(), createdEntity.getLastLog());
-        assertEquals(entity.getSession(), createdEntity.getSession());
+        assertEquals(null, entity.getSession());
 
         ResponseEntity<?> responseDelete = controller.delete(createdEntity.getId());
 
@@ -64,7 +66,7 @@ public class DoctorsControllerTest {
     @Test
     public void test_getOne() {
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now(), 100);
+        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
 
         ResponseEntity<?> createdResponse = controller.create(entity);
 
@@ -83,8 +85,7 @@ public class DoctorsControllerTest {
         assertEquals(entity.getPassword(), retrievedEntity.getPassword());
         assertEquals(entity.getName(), retrievedEntity.getName());
         assertEquals(entity.getLastLog(), retrievedEntity.getLastLog());
-        assertEquals(entity.getSession(), retrievedEntity.getSession());
-
+        assertEquals(null, entity.getSession());
 
         ResponseEntity<?> responseDelete = controller.delete(retrievedEntity.getId());
 
@@ -94,7 +95,7 @@ public class DoctorsControllerTest {
 
     @Test
     public void test_update() {
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now(), 100);
+        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
 
         ResponseEntity<?> createdResponse = controller.create(entity);
 
@@ -108,7 +109,11 @@ public class DoctorsControllerTest {
         entity.setPassword("password2");
         entity.setName("test2");
         entity.setLastLog(LocalDate.of(2023, 05, 15));
-        entity.setSession(101);
+        
+        Random random = new Random();
+        Integer session = random.nextInt(1000000000);  // Generates a random number between 0 and 1000000000
+        entity.setSession(session);
+        assertNotEquals(0, entity.getSession(), 0);
 
         ResponseEntity<?> updatedResponse = controller.update(entityId, entity);
 
@@ -123,7 +128,7 @@ public class DoctorsControllerTest {
         assertEquals("password2", updatedEntity.getPassword());
         assertEquals("test2", updatedEntity.getName());
         assertEquals(LocalDate.of(2023, 05, 15), updatedEntity.getLastLog());
-        assertEquals(101, updatedEntity.getSession());
+        assertEquals(entity.getSession(), updatedEntity.getSession());
 
         ResponseEntity<?> responseDelete = controller.delete(updatedEntity.getId());
 
@@ -141,7 +146,7 @@ public class DoctorsControllerTest {
 
         assertNotNull(beforeDeleteEntities);
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now(), 100);
+        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
 
         ResponseEntity<?> response = controller.delete(entity.getId());
 
