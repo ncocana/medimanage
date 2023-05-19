@@ -1,6 +1,7 @@
 package edu.craptocraft.medimanage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import edu.craptocraft.medimanage.entity.Doctors;
 import edu.craptocraft.medimanage.entity.Login;
 import edu.craptocraft.medimanage.service.DoctorsService;
 import edu.craptocraft.medimanage.service.LoginService;
@@ -33,70 +35,85 @@ public class WebController {
     @Autowired
     private PatientsService servicePatient;
 
+    private Doctors currentUser = null;
+
     @RequestMapping("/")
     public RedirectView redirect() {
         return new RedirectView("/home");
     }
 
     @RequestMapping("/home")
-    public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
+    public Object index() {
+        if (currentUser != null) {
+            return new RedirectView("gestion");
+        } else {
+            return new ModelAndView("/home");
+        }
     }
 
     @RequestMapping("/login")
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView("login");
-        return modelAndView;
+    public Object login() {
+        if (currentUser != null) {
+            return new RedirectView("gestion");
+        } else {
+            return new ModelAndView("/login");
+        }
     }
 
-    // @RequestMapping(value = "/loginprocess", method = RequestMethod.GET,headers = "Accept=application/json")
-    // @ResponseBody
     @PostMapping(path = "/login-process")
-    public ModelAndView loginprocess(@RequestBody Login request) {
-        ModelAndView modelAndView = new ModelAndView();
+    public boolean loginProcess(@RequestBody Login request) {
         
         String email = request.getEmail();
         String password = request.getPassword();
-        // if (email == null && password == null) {
-        //     return null;
-        // }
+
         boolean doctorExists = serviceLogin.login(email, password);
+        currentUser = serviceLogin.getDoctor();
         
-        if (doctorExists) {
-            // Login successful
-            modelAndView.setViewName("gestion");
-            modelAndView.addObject("message", "Login successful");
-        }
-        if (!doctorExists) {
-            // Login failed
-            modelAndView.setViewName("login");
-            modelAndView.addObject("message", "Invalid email or password");
-        }
-        return modelAndView;
+        // If login is successful, return true.
+        // If login fails, return false.
+        return doctorExists;
     }
 
-    @RequestMapping("/logoutProcess")
-    public RedirectView logoutProcess() {
+    @GetMapping(path = "/session/current-user")
+    public Doctors getCurrentUser() {
+        currentUser = serviceLogin.getDoctor();
+        return currentUser;
+    }
+
+    @PostMapping(path = "/logout-process")
+    public boolean logoutProcess() {
+        
         serviceLogin.logOut();
-        return new RedirectView("/home");
+        currentUser = null;
+        
+        // If log out is successful, return false.
+        // If log out fails, return true.
+        return serviceLogin.isLoggedIn();
     }
 
     @RequestMapping("/gestion")
-    public ModelAndView gestion() {
-        ModelAndView modelAndView = new ModelAndView("gestion");
-        modelAndView.addObject("prescriptions", servicePrescription.getAll());
-        return modelAndView;
+    public Object gestion() {
+        if (currentUser != null) {
+            ModelAndView modelAndView = new ModelAndView("gestion");
+            modelAndView.addObject("prescriptions", servicePrescription.getAll());
+            return modelAndView;
+        } else {
+            return new RedirectView("/home");
+        }
     }
 
-    @RequestMapping("/alta")
-    public ModelAndView alta() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("alta");
-        modelAndView.addObject("doctors", serviceDoctor.getAll());
-        modelAndView.addObject("medicines", serviceMedicine.getAll());
-        modelAndView.addObject("patients", servicePatient.getAll());
-        return modelAndView;
+    @RequestMapping("/gestion/alta")
+    public Object alta() {
+        if (currentUser != null) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("alta");
+            modelAndView.addObject("doctors", serviceDoctor.getAll());
+            modelAndView.addObject("medicines", serviceMedicine.getAll());
+            modelAndView.addObject("patients", servicePatient.getAll());
+            return modelAndView;
+        } else {
+            return new RedirectView("/home");
+        }
     }
-    
+
 }

@@ -19,7 +19,7 @@ public class LoginIMPL implements LoginService {
     private boolean isLogged = false;
     private Doctors doctorLogged = null;
 
-    @Override
+    // @Override
     public boolean login(String email, String password) {
         List<Doctors> doctors = serviceDoctor.getAll();
         for(Doctors doctor : doctors) {
@@ -28,6 +28,7 @@ public class LoginIMPL implements LoginService {
                 doctor.setLastLog(LocalDate.now());
                 serviceDoctor.update(doctor.getId(), doctor);
                 this.setLoggedIn(true);
+                this.setDoctor(doctor);
                 return true;
             }
         }
@@ -39,14 +40,17 @@ public class LoginIMPL implements LoginService {
         return this.isLogged;
     }
 
-    @Override
-    public void setLoggedIn(boolean value) {
+    private void setLoggedIn(boolean value) {
         this.isLogged = value;
     }
 
     @Override
     public Doctors getDoctor() {
         return this.doctorLogged;
+    }
+
+    private void setDoctor(Doctors doctor) {
+        this.doctorLogged = doctor;
     }
 
     @Override

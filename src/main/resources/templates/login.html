@@ -31,6 +31,7 @@
                 <label for="passwordInput">Password</label>
                 <input type="password" class="form-input" id="passwordInput" placeholder="Password">
             </div>
+            <div id="loginOutput" class="text-center"></div>
             <div class="text-center"><button type="submit" id="loginButton" class="button"><span class="glyphicon glyphicon-log-in"></span> Log in</button></div>
         </main>
 
@@ -39,6 +40,11 @@
                 $('#loginButton').click(function() {
                     var email = $('#emailInput').val();
                     var password = $('#passwordInput').val();
+                    // Validate if email and password are not empty.
+                    if (!email || !password) {
+                        alert('Please enter both email and password.');
+                        return;
+                    }
                     var data = {
                         "email": email,
                         "password": password
@@ -53,7 +59,13 @@
                             'Content-Type': 'application/json'
                         },
                         complete: function(response) {
-                            // window.location.href = '/gestion';
+                            // console.log(response.responseJSON);
+                            if (response.responseJSON == true) {
+                                window.location.href = '/gestion';
+                            }
+                            if (response.responseJSON == false) {
+                                $('#loginOutput').html("<p style='color: red;'>Invalid email or password.</p>");
+                            }
                         }
                     });
                 });

@@ -15,8 +15,8 @@
                 <a href="/" class="logo nav-link">MediManage</a>
                 <ul class="nav-menu">
                     <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
-                    <li class="nav-menu-item"><a href="/alta" class="nav-menu-link">Dar de alta</a></li>
-                    <li class="nav-menu-item"><a href="/home" class="nav-menu-link"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                    <li class="nav-menu-item"><a href="/gestion/alta" class="nav-menu-link">Dar de alta</a></li>
+                    <li class="nav-menu-item"><a href="#" class="nav-menu-link" id="logoutButton"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                 </ul>
             </nav>
         </header>
@@ -46,5 +46,25 @@
                 </table>
             </div>
         </main>
+
+        <script>
+            $(document).ready(function() {
+                $('#logoutButton').click(function() {
+                    $.ajax({
+                        url: '/logout-process',
+                        type: 'POST',
+                        complete: function(response) {
+                            // console.log(response.responseJSON);
+                            if (response.responseJSON == true) {
+                                alert("Ups! Something weird is happening and you can't log out...")
+                            }
+                            if (response.responseJSON == false) {
+                                window.location.href = '/home';
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

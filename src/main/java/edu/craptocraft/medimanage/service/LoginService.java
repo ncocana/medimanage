@@ -7,8 +7,6 @@ public interface LoginService {
     boolean login(String email, String password);
 
     boolean isLoggedIn();
-
-    void setLoggedIn(boolean value);
     
     Doctors getDoctor();
 
