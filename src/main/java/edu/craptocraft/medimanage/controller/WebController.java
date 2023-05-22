@@ -119,6 +119,16 @@ public class WebController {
         }
     }
 
+    @GetMapping("/prescriptions-management/delete/{id}")
+    public Object prescriptionsManagementDelete(@PathVariable int id) {
+        if (currentUser != null) {
+            servicePrescription.delete(id);
+            return new RedirectView("/prescriptions-management");
+        } else {
+            return new RedirectView("/home");
+        }
+    }
+
     @RequestMapping("/prescriptions-management/discharge")
     public Object discharge() {
         if (currentUser != null) {
