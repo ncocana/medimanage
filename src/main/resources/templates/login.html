@@ -61,7 +61,7 @@
                         complete: function(response) {
                             // console.log(response.responseJSON);
                             if (response.responseJSON == true) {
-                                window.location.href = '/gestion';
+                                window.location.href = '/management';
                             }
                             if (response.responseJSON == false) {
                                 $('#loginOutput').html("<p style='color: red;'>Invalid email or password.</p>");

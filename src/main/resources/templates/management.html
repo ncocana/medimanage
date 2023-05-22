@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Gestion | MediManage</title>
+        <title>Prescription Management | MediManage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
         <link rel="stylesheet" th:href="@{/css/main.css}">
@@ -15,14 +15,14 @@
                 <a href="/" class="logo nav-link">MediManage</a>
                 <ul class="nav-menu">
                     <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
-                    <li class="nav-menu-item"><a href="/gestion/alta" class="nav-menu-link">Dar de alta</a></li>
+                    <li class="nav-menu-item"><a href="/management/discharge" class="nav-menu-link">Discharge</a></li>
                     <li class="nav-menu-item"><a href="#" class="nav-menu-link" id="logoutButton"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
-            <h1 class="text-center">Gestion</h1>
+            <h1 class="text-center">Prescription Management</h1>
             <div>
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -31,7 +31,7 @@
                             <th>Doctor</th>
                             <th>Medicine</th>
                             <th>Patient</th>
-                            <th>Date</th>
+                            <th>Expiration Date</th>
                         </tr>
                     </thead>
                     <tbody id="output">
@@ -40,7 +40,7 @@
                             <td th:text="${prescription.idDoctor.name}">Doctor</td>
                             <td th:text="${prescription.idMedicine.name}">Medicine</td>
                             <td th:text="${prescription.idPatient.name}">Patient</td>
-                            <td th:text="${prescription.date}">Date</td>
+                            <td th:text="${prescription.date}">Expiration Date</td>
                         </tr>
                     </tbody>
                 </table>
