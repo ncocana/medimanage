@@ -65,6 +65,11 @@
                             }
                             if (response.responseJSON == false) {
                                 $('#loginOutput').html("<p style='color: red;'>Invalid email or password.</p>");
+                                $('#loginOutput').addClass('shake');
+                                
+                                setTimeout(function() {
+                                    $('#loginOutput').removeClass('shake');
+                                }, 1000);
                             }
                         }
                     });

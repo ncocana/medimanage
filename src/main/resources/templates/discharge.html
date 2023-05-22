@@ -58,6 +58,11 @@
                     var idMedicine = $('#selectMedicine').val();
                     var idPatient = $('#selectPatient').val();
                     var date = $('#inputDate').val();
+                    // Validate if the data introduced is not empty.
+                    if (idDoctor == null || idMedicine == null || idPatient == null || !date) {
+                        alert('Please enter valid data.');
+                        return;
+                    }
                     var data = {
                         "idDoctor": idDoctor,
                         "idMedicine": idMedicine,
