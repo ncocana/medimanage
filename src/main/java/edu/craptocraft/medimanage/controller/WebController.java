@@ -38,16 +38,16 @@ public class WebController {
     private Doctors currentUser = null;
 
     @RequestMapping("/")
-    public RedirectView redirect() {
+    public RedirectView root() {
         return new RedirectView("/home");
     }
 
     @RequestMapping("/home")
-    public Object index() {
+    public Object home() {
         if (currentUser != null) {
             return new RedirectView("management");
         } else {
-            return new ModelAndView("/home");
+            return new ModelAndView("index");
         }
     }
 
