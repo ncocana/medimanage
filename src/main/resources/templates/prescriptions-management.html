@@ -37,7 +37,7 @@
                     </thead>
                     <tbody id="output">
                         <tr th:if="${currentUser.id == prescription.idDoctor.id}" th:each="prescription : ${prescriptions}">
-                            <td th:text="${prescription.id}">ID</td>
+                            <td th:text="${prescription.id}" class="text-center-vertically">ID</td>
                             <td th:text="${prescription.idDoctor.name}">Doctor</td>
                             <td th:text="${prescription.idMedicine.name}">Medicine</td>
                             <td th:text="${prescription.idPatient.name}">Patient</td>

@@ -2,6 +2,7 @@ package edu.craptocraft.medimanage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,6 +98,21 @@ public class WebController {
             ModelAndView modelAndView = new ModelAndView("prescriptions-management");
             modelAndView.addObject("currentUser", currentUser);
             modelAndView.addObject("prescriptions", servicePrescription.getAll());
+            return modelAndView;
+        } else {
+            return new RedirectView("/home");
+        }
+    }
+
+    @GetMapping("/prescriptions-management/update/{id}")
+    public Object prescriptionsManagementUpdate(@PathVariable int id) {
+        if (currentUser != null) {
+            ModelAndView modelAndView = new ModelAndView("prescriptions-update");
+            modelAndView.addObject("currentUser", currentUser);
+            modelAndView.addObject("doctors", serviceDoctor.getAll());
+            modelAndView.addObject("medicines", serviceMedicine.getAll());
+            modelAndView.addObject("patients", servicePatient.getAll());
+            modelAndView.addObject("prescription", servicePrescription.getOne(id));
             return modelAndView;
         } else {
             return new RedirectView("/home");

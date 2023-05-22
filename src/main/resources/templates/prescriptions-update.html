@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Discharge | MediManage</title>
+        <title>Update Prescription | MediManage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
         <link rel="stylesheet" th:href="@{/css/main.css}">
@@ -22,44 +22,49 @@
         </header>
 
         <main>
-            <h1 class="text-center">Discharge</h1>
+            <h1 class="text-center">Update Prescription</h1>
+            <div class="form-group">
+                <label for="inputPrescription">Prescription ID</label>
+                <input type="text" class="form-input" id="inputPrescription" placeholder="Prescription ID" th:value="${prescription.id}" readonly>
+            </div>
             <div class="form-group">
                 <label for="selectDoctor">Doctor</label>
-                <select id="selectDoctor" class="form-select" required th:field="*{doctors}">
+                <select id="selectDoctor" class="form-select" required th:field="*{prescription.idDoctor}">
                     <option disabled selected value="">Select a doctor</option>
                     <option th:each="doctor : ${doctors}" th:if="${currentUser.id == doctor.id}" th:value="${doctor.id}" th:text="${doctor.name}">Doctor</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="selectMedicine">Medicine</label>
-                <select id="selectMedicine" class="form-select" required>
+                <select id="selectMedicine" class="form-select" required th:field="*{prescription.idMedicine}">
                     <option disabled selected value="">Select a medicine</option>
                     <option th:each="medicine : ${medicines}" th:value="${medicine.id}" th:text="${medicine.name}">Medicine</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="selectPatient">Patient</label>
-                <select id="selectPatient" class="form-select" required>
-                    <option disabled selected value="">Select a patient</option>
+                <select id="selectPatient" class="form-select" required th:field="*{prescription.idPatient}">
+                    <option disabled value="">Select a patient</option>
                     <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.name}">Patient</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="inputDate">Expiration Date</label>
-                <input type="date" class="form-input" id="inputDate" placeholder="Password">
+                <input type="date" class="form-input" id="inputDate" placeholder="Password" th:value="${prescription.date}">
             </div>
-            <div class="text-center"><button type="submit" class="button" id="createButton">Create</button></div>
+            <div class="text-center"><button type="submit" class="button" id="updateButton">Update</button></div>
         </main>
 
         <script>
             $(document).ready(function() {
-                $('#createButton').click(function() {
+                $('#updateButton').click(function() {
+                    var idPrescription = $('#inputPrescription').val();
                     var idDoctor = $('#selectDoctor').val();
                     var idMedicine = $('#selectMedicine').val();
                     var idPatient = $('#selectPatient').val();
                     var date = $('#inputDate').val();
                     // Validate if the data introduced is not empty.
-                    if (idDoctor == null || idMedicine == null || idPatient == null || !date) {
+                    if (idPrescription == null || idDoctor == null || idMedicine == null || idPatient == null || !date) {
                         alert('Please enter valid data.');
                         return;
                     }
@@ -70,8 +75,8 @@
                         "date": date
                     };
                     $.ajax({
-                        url: '/prescriptions/create',
-                        type: 'POST',
+                        url: '/prescriptions/update/' + idPrescription,
+                        type: 'PUT',
                         data: JSON.stringify(data),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
