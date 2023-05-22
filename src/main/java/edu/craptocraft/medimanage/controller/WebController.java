@@ -45,7 +45,7 @@ public class WebController {
     @RequestMapping("/home")
     public Object home() {
         if (currentUser != null) {
-            return new RedirectView("management");
+            return new RedirectView("prescriptions-management");
         } else {
             return new ModelAndView("index");
         }
@@ -54,7 +54,7 @@ public class WebController {
     @RequestMapping("/login")
     public Object login() {
         if (currentUser != null) {
-            return new RedirectView("management");
+            return new RedirectView("prescriptions-management");
         } else {
             return new ModelAndView("/login");
         }
@@ -91,10 +91,10 @@ public class WebController {
         return serviceLogin.isLoggedIn();
     }
 
-    @RequestMapping("/management")
-    public Object management() {
+    @RequestMapping("/prescriptions-management")
+    public Object prescriptionsManagement() {
         if (currentUser != null) {
-            ModelAndView modelAndView = new ModelAndView("management");
+            ModelAndView modelAndView = new ModelAndView("prescriptions-management");
             modelAndView.addObject("currentUser", currentUser);
             modelAndView.addObject("prescriptions", servicePrescription.getAll());
             return modelAndView;
@@ -103,7 +103,7 @@ public class WebController {
         }
     }
 
-    @RequestMapping("/management/discharge")
+    @RequestMapping("/prescriptions-management/discharge")
     public Object discharge() {
         if (currentUser != null) {
             ModelAndView modelAndView = new ModelAndView();

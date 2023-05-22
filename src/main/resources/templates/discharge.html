@@ -15,7 +15,7 @@
                 <a href="/" class="logo nav-link">MediManage</a>
                 <ul class="nav-menu">
                     <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
-                    <li class="nav-menu-item"><a href="/management/discharge" class="nav-menu-link">Discharge</a></li>
+                    <li class="nav-menu-item"><a href="/prescriptions-management/discharge" class="nav-menu-link">Discharge</a></li>
                     <li class="nav-menu-item"><a href="#" class="nav-menu-link" id="logoutButton"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                 </ul>
             </nav>
@@ -76,7 +76,7 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         complete: function(response) {
-                            window.location.href = '/management';
+                            window.location.href = '/prescriptions-management';
                         }
                     });
                 });

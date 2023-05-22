@@ -15,7 +15,7 @@
                 <a href="/" class="logo nav-link">MediManage</a>
                 <ul class="nav-menu">
                     <li class="nav-menu-item"><a href="/home" class="nav-menu-link">Home</a></li>
-                    <li class="nav-menu-item"><a href="/management/discharge" class="nav-menu-link">Discharge</a></li>
+                    <li class="nav-menu-item"><a href="/prescriptions-management/discharge" class="nav-menu-link">Discharge</a></li>
                     <li class="nav-menu-item"><a href="#" class="nav-menu-link" id="logoutButton"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                 </ul>
             </nav>
@@ -32,6 +32,7 @@
                             <th>Medicine</th>
                             <th>Patient</th>
                             <th>Expiration Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="output">
@@ -41,6 +42,10 @@
                             <td th:text="${prescription.idMedicine.name}">Medicine</td>
                             <td th:text="${prescription.idPatient.name}">Patient</td>
                             <td th:text="${prescription.date}">Expiration Date</td>
+                            <td>
+                                <a th:href="@{/prescriptions-management/update/{id}(id=${prescription.id})}" class="btn btn-info">Update</a>
+                                <a th:href="@{/prescriptions-management/delete/{id}(id=${prescription.id})}" class="btn btn-danger">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

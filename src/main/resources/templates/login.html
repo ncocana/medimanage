@@ -61,7 +61,7 @@
                         complete: function(response) {
                             // console.log(response.responseJSON);
                             if (response.responseJSON == true) {
-                                window.location.href = '/management';
+                                window.location.href = '/prescriptions-management';
                             }
                             if (response.responseJSON == false) {
                                 $('#loginOutput').html("<p style='color: red;'>Invalid email or password.</p>");
