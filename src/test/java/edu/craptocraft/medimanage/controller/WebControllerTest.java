@@ -57,7 +57,7 @@ public class WebControllerTest {
 
     @Test
     public void test_homeWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> response = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) response.getBody();
@@ -78,12 +78,12 @@ public class WebControllerTest {
     public void test_homeWithoutCurrentUser() {
         Object result = webController.home();
         assertTrue(result instanceof ModelAndView);
-        assertEquals("index", ((ModelAndView) result).getViewName());
+        assertEquals("/index", ((ModelAndView) result).getViewName());
     }
 
     @Test
     public void test_loginWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> response = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) response.getBody();
@@ -117,8 +117,34 @@ public class WebControllerTest {
     }
 
     @Test
+    public void test_signUpWithCurrentUser() {
+        doctor = new Doctors("test@example.com", "password", "test");
+        doctorsService.create(doctor);
+        ResponseEntity<?> response = doctorsController.getOne(doctor.getId());
+        Doctors createdDoctor = (Doctors) response.getBody();
+        login = new Login(createdDoctor.getEmail(), createdDoctor.getPassword());
+        webController.loginProcess(login);
+
+        Object result = webController.signUp();
+        assertTrue(result instanceof RedirectView);
+        assertEquals("prescriptions-management", ((RedirectView) result).getUrl());
+
+        webController.logoutProcess();
+        ResponseEntity<?> responseDelete = doctorsController.delete(createdDoctor.getId());
+        assertNotNull(responseDelete);
+        assertEquals(HttpStatus.OK, responseDelete.getStatusCode());
+    }
+
+    @Test
+    public void test_signUpWithoutCurrentUser() {
+        Object result = webController.signUp();
+        assertTrue(result instanceof ModelAndView);
+        assertEquals("/sign-up", ((ModelAndView) result).getViewName());
+    }
+
+    @Test
     public void test_prescriptionsManagementWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> response = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) response.getBody();
@@ -147,7 +173,7 @@ public class WebControllerTest {
 
     @Test
     public void test_prescriptionsManagementUpdateWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> responseDoctors = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) responseDoctors.getBody();
@@ -191,7 +217,7 @@ public class WebControllerTest {
 
     @Test
     public void test_prescriptionsManagementDeleteWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> responseDoctors = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) responseDoctors.getBody();
@@ -229,7 +255,7 @@ public class WebControllerTest {
 
     @Test
     public void test_dischargeWithCurrentUser() {
-        doctor = new Doctors("test@example.com", "password", "test", LocalDate.now());
+        doctor = new Doctors("test@example.com", "password", "test");
         doctorsService.create(doctor);
         ResponseEntity<?> response = doctorsController.getOne(doctor.getId());
         Doctors createdDoctor = (Doctors) response.getBody();

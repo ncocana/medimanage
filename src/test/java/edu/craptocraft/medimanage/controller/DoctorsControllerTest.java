@@ -30,7 +30,7 @@ public class DoctorsControllerTest {
     @Test
     public void test_create() {
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
+        entity = new Doctors("test@gmail.com", "password", "test");
         ResponseEntity<?> response = controller.create(entity);
 
         assertNotNull(response);
@@ -43,7 +43,7 @@ public class DoctorsControllerTest {
         assertEquals(entity.getPassword(), createdEntity.getPassword());
         assertEquals(entity.getName(), createdEntity.getName());
         assertEquals(entity.getLastLog(), createdEntity.getLastLog());
-        assertEquals(null, entity.getSession());
+        assertEquals(entity.getSession(), createdEntity.getSession());
 
         ResponseEntity<?> responseDelete = controller.delete(createdEntity.getId());
 
@@ -66,7 +66,7 @@ public class DoctorsControllerTest {
     @Test
     public void test_getOne() {
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
+        entity = new Doctors("test@gmail.com", "password", "test");
 
         ResponseEntity<?> createdResponse = controller.create(entity);
 
@@ -85,7 +85,7 @@ public class DoctorsControllerTest {
         assertEquals(entity.getPassword(), retrievedEntity.getPassword());
         assertEquals(entity.getName(), retrievedEntity.getName());
         assertEquals(entity.getLastLog(), retrievedEntity.getLastLog());
-        assertEquals(null, entity.getSession());
+        assertEquals(entity.getSession(), retrievedEntity.getSession());
 
         ResponseEntity<?> responseDelete = controller.delete(retrievedEntity.getId());
 
@@ -95,7 +95,7 @@ public class DoctorsControllerTest {
 
     @Test
     public void test_update() {
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
+        entity = new Doctors("test@gmail.com", "password", "test");
 
         ResponseEntity<?> createdResponse = controller.create(entity);
 
@@ -146,7 +146,7 @@ public class DoctorsControllerTest {
 
         assertNotNull(beforeDeleteEntities);
 
-        entity = new Doctors("test@gmail.com", "password", "test", LocalDate.now());
+        entity = new Doctors("test@gmail.com", "password", "test");
 
         ResponseEntity<?> response = controller.delete(entity.getId());
 
