@@ -36,11 +36,11 @@ public class Doctors {
 
     public Doctors() {}
 
-    public Doctors(String email, String password, String name, LocalDate lastLog) {
+    public Doctors(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.lastLog = lastLog;
+        this.lastLog = null;
         this.session = null;
     }
 

@@ -73,10 +73,6 @@ main {
     transition: 0.5s;
 }
 
-.text-center {
-    text-align: center;
-}
-
 .button {
     display: inline-block;
     margin-bottom: 0;
@@ -108,6 +104,11 @@ main {
 
 .form-group {
     margin-bottom: 15px;
+}
+
+.form-group-end {
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .form-input, .form-select {
@@ -145,6 +146,10 @@ small {
 
 .text-muted {
     color:#777;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .table thead {

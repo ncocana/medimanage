@@ -48,7 +48,7 @@ public class WebController {
         if (currentUser != null) {
             return new RedirectView("prescriptions-management");
         } else {
-            return new ModelAndView("index");
+            return new ModelAndView("/index");
         }
     }
 
@@ -90,6 +90,15 @@ public class WebController {
         // If log out is successful, return false.
         // If log out fails, return true.
         return serviceLogin.isLoggedIn();
+    }
+
+    @RequestMapping("/sign-up")
+    public Object signUp() {
+        if (currentUser != null) {
+            return new RedirectView("prescriptions-management");
+        } else {
+            return new ModelAndView("/sign-up");
+        }
     }
 
     @RequestMapping("/prescriptions-management")

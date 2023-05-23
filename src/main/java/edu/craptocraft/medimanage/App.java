@@ -39,9 +39,9 @@ public class App implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            Doctors doctor1 = new Doctors("arodriguez@gmail.com", "password", "Alejandro Rodríguez", LocalDate.of(2023, 05, 15));
-            Doctors doctor2 = new Doctors("jpiedra@gmail.com", "password", "José Piedra", LocalDate.of(2023, 05, 15));
-            Doctors doctor3 = new Doctors("flawrence@gmail.com", "password", "Fernando Lawrence", LocalDate.of(2023, 05, 15));
+            Doctors doctor1 = new Doctors("arodriguez@gmail.com", "password", "Alejandro Rodríguez");
+            Doctors doctor2 = new Doctors("jpiedra@gmail.com", "password", "José Piedra");
+            Doctors doctor3 = new Doctors("flawrence@gmail.com", "password", "Fernando Lawrence");
             repoDoctors.save(doctor1);
             repoDoctors.save(doctor2);
             repoDoctors.save(doctor3);
