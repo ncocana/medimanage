@@ -9,19 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import edu.craptocraft.medimanage.entity.Patients;
-import edu.craptocraft.medimanage.service.implementation.PatientsIMPL;
+import edu.craptocraft.medimanage.service.PatientsService;
 
 @RestController
 @RequestMapping("/patients")
 public class PatientsController {
 
     @Autowired
-    private PatientsIMPL impl;
+    private PatientsService servicePatient;
 
     @PostMapping(path = "/create")
     public ResponseEntity<?> create(@RequestBody Patients patient) {
         try {
-            Patients createdPatient = this.impl.create(patient);
+            Patients createdPatient = this.servicePatient.create(patient);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPatient);
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().body("An error ocurred: " + e.getMessage() + "\nThe email is already in use.");
@@ -30,25 +30,25 @@ public class PatientsController {
 
     @GetMapping(path = "/get/all")
     public ResponseEntity<?> getAll() {
-        List<Patients> listPatients = this.impl.getAll();
+        List<Patients> listPatients = this.servicePatient.getAll();
         return ResponseEntity.ok(listPatients);
     }
 
     @GetMapping(path = "/get/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id) {
-        Patients singlePatient = this.impl.getOne(id);
+        Patients singlePatient = this.servicePatient.getOne(id);
         return ResponseEntity.ok(singlePatient);
     }
 
     @PutMapping(path = "update/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody Patients patient) {
-        Patients updatedPatient = this.impl.update(id, patient);
+        Patients updatedPatient = this.servicePatient.update(id, patient);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedPatient);
     }
 
     @DeleteMapping(path= "delete/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
-        this.impl.delete(id);
+        this.servicePatient.delete(id);
         return ResponseEntity.ok().build();
     }
     
