@@ -17,7 +17,11 @@
 
 ## Introduction
 
+This is a project proposed by our teacher for the assignature of Development Enviroments (*Entornos de Desarrollo*). Our task was to create a Java backend and frontend with methods for POST and GET requests to get and create data in a database, showing a list of the medical prescriptions in the database and being able to add a new one, plus create the logic for a login feature.   
 
+To achieve this, I decided to use Spring Boot to create an API REST to make HTTP petitions (POST, GET, PUT, and DELETE) to every entity (table) of the database, Thymeleaf to interact with the data received from the backend, JQuery to send HTTP petitions to the backend, MySQL for the database, and Docker to make the application portable.   
+
+I ended up adding more features that the ones initially asked for, as I felt it was the minimum a web application should have and be able to do. I also intend to keep adding more features if I have the time, such as webpages to manage the `Medicines` and `Patients` entities, another to edit the user account as `Doctors` entity when logged in, or an option to see the medical prescriptions whose expiration date have not expired yet, among others.   
 
 ### Database Schema
 
@@ -61,7 +65,19 @@ There are three attributes in the table `Prescriptions`:
 
 ### UML Diagram
 
+- **`main/java/edu/craptocraft/medimanage`**
+  - **`App`:** Main app to execute the application.
+  - **`controller`:** Controllers and endpoints of the API REST.
+  - **`entity`:** Entities used to create the database's tables, plus another not-entity class.
+  - **`repository`:** Repositories to access the methods of `CrudRepository`.
+  - **`service`:** Interfaces of the methods used by the controllers.
+    - **`implementation`:** Implementation of the methods of the interfaces.
+- **`main/resources`**
+  - **`static`:** CSS and images for the frontend.
+  - **`templates`:** HTML webpages.
+- **`test`:** Test cases for the application's backend.
 
+![UML Diagram](./docs/diagram_uml.png)
 
 ## How to install
 
@@ -83,7 +99,7 @@ You will need to have already installed: `Git`, and `Docker`.
 
     This will create the needed containers (one for the MySQL database, and another for the application automatically building before a Docker image using the existing Dockerfile) and a network for the containers to connect with each other.   
 
-    Upon executing the application for the first time, it will also populate it with some mock data. If this is something you don't want, you can go to the `App.java` file and comment the `run(String... args)` function along with the repository attributes in the code. This will create instead an empty database, so you will have to create the desired data yourself (if an error happens when creating an empty database, you will need to go to the `src/main/resources/application.properties` file and change `spring.jpa.hibernate.ddl-auto` to `create` and then to `update` again after the first execution).   
+    Upon executing the application for the first time, it will also populate it with some mock data. If this is something you don't want, you can go to the `App.java` file and comment the `run(String... args)` function along with the service attributes in the code. This will create instead an empty database, so you will have to create the desired data yourself (if an error happens when creating an empty database, you will need to go to the `src/main/resources/application.properties` file and change `spring.jpa.hibernate.ddl-auto` to `create` and then to `update` again after the first execution).   
 
     You will know the containers are fully and already created when you see a log saying `Started App` along with some logs of inserted data if you haven't the `run(String... args)` function from the `App.java` file:   
 
@@ -106,6 +122,8 @@ You will need to have already installed: `Git`, and `Docker`.
     You can enter the container with: `docker exec -it medimanage bash`.
 
 ## How to use
+
+Enter to the following link to see the webpage of the application: [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 ### Home
 
