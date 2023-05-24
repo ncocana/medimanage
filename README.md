@@ -21,7 +21,7 @@ This is a project proposed by our teacher for the assignature of Development Env
 
 To achieve this, I decided to use Spring Boot to create an API REST to make HTTP petitions (POST, GET, PUT, and DELETE) to every entity (table) of the database, Thymeleaf to interact with the data received from the backend, JQuery to send HTTP petitions to the backend, MySQL for the database, and Docker to make the application portable.   
 
-I ended up adding more features that the ones initially asked for, as I felt it was the minimum a web application should have and be able to do. I also intend to keep adding more features if I have the time, such as webpages to manage the `Medicines` and `Patients` entities, another to edit the user account as `Doctors` entity when logged in, or an option to see the medical prescriptions whose expiration date have not expired yet, among others.   
+I ended up adding more features that the ones initially asked for, as I felt it was the minimum a web application should have and be able to do. I also intend to keep adding more features if I have the time, such as webpages to manage the `Medicines` and `Patients` entities, another to edit the user account as `Doctors` entity when logged in, among others.   
 
 ### Database Schema
 
@@ -145,7 +145,7 @@ You will be asked to enter your full name, email address, and a password. Once y
 
 ### Prescriptions Management
 
-This is the homepage you'll see once signed in. You can see a list with the data from the `Prescriptions` table, along with a column with two buttons to update or delete the entry.   
+This is the homepage you'll see once signed in. You can see a table with the data from the `Prescriptions` table, along with a column with two buttons to update or delete the entry. There's also a button to show/hide the expired prescriptions if the user wants to.   
 
 The data you see will be the one associated with your Doctor account. You wouldn't be able to see the prescriptions associated to another doctors.   
 
