@@ -24,6 +24,8 @@
         <main>
             <h1 class="text-center">Prescription Management</h1>
             <div>
+                <label>Show expired prescriptions:</label>
+                <button id="toggleExpiredButton" class="btn btn-primary">Toggle Expired</button>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -68,6 +70,27 @@
                             }
                         }
                     });
+                });
+
+                $(document).ready(function () {
+                    var showExpired = false;
+
+                    $('#toggleExpiredButton').click(function () {
+                        showExpired = !showExpired;
+                        toggleExpired(showExpired);
+                    });
+
+                    function toggleExpired(showExpired) {
+                        var tableRows = $('tbody#output tr');
+                        tableRows.each(function () {
+                            var expirationDate = $(this).find('td:eq(4)').text();
+                            var currentDate = new Date().toISOString().slice(0, 10);
+                            var isExpired = (expirationDate < currentDate);
+                            $(this).toggle(showExpired || !isExpired);
+                        });
+                    }
+
+                    toggleExpired(showExpired);
                 });
             });
         </script>
